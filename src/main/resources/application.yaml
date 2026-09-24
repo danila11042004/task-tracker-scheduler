@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: scheduler-service
+  kafka:
+    bootstrap-servers: ${KAFKA_SERVERS}
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JacksonJsonSerializer
+      retries: 5
+      properties:
+        delivery.timeout.ms: 125000
+        request.timeout.ms: 25000
+        spring.json.add.type.headers: false
+      transaction-id-prefix: scheduler-tx-
+    consumer:
+      group-id: scheduler-service
+      value-deserializer: org.springframework.kafka.support.serializer.JacksonJsonDeserializer
+backend:
+  url: ${BACKEND_URL}
+  secret: ${BACKEND_SECRET}
+kafka:
+  topics:
+    summarization-request: ${KAFKA_SUMMARIZATION_REQUEST_TOPIC}
+    summarization-response: ${KAFKA_SUMMARIZATION_RESPONSE_TOPIC}
+    sending-email: ${KAFKA_SENDING_EMAIL_TOPIC}
