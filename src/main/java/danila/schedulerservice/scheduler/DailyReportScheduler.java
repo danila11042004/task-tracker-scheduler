@@ -18,7 +18,7 @@ public class DailyReportScheduler {
     private final BackendClient backendClient;
     private final SummarizationProducer summarizationProducer;
 
-    @Scheduled(cron = "0 59 23 * * *", zone = "Europe/Moscow")
+    @Scheduled(cron = "0 30 18 * * *", zone = "Europe/Moscow")
     public void requestDailyReport() {
         List<UserDto> userDtoList = backendClient.getUserDtoList();
         for (UserDto userDto : userDtoList) {
